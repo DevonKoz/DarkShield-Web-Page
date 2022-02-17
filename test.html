@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkShield API Interaction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="dropdown.js"></script>
+  <script type="text/javascript" src="generateContext.js"></script>
+  <script type="text/javascript" src="ajax.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <label for="host">Host:</label>
+    <input type="host" id="host" name="host" value="localhost"><br><br>
+    <label for="port">Port:</label>
+    <input type="port" id="port" name="port" value="8959"><br><br>
+    <div>
+      <button class="accordion">Search Matchers</button>
+      <div class="panel" id="searchMatchers">
+        SSN <input type="checkbox" id="US SSN">
+        Credit Card <input type="checkbox" id="Credit Cards">
+        Emails <input type="checkbox" id="Emails">
+        Names <input type="checkbox" id="Names">
+        Phone <input type="checkbox" id="Phone Numbers">
+      </div>
+    </div>
+    <div>
+      <button class="accordion">Mask Rules</button>
+      <div class="panel" id="maskRules">
+        FPE <input type="checkbox" id="FPE AES256 Encryption">
+        HASH <input type="checkbox" id="Hash">
+        Redact <input type="checkbox" id="Redaction">
+        Pseudomize <input type="checkbox" id="Pseudonymization">
+        AES 256 <input type="checkbox" id="AES256 Encryption">
+      </div>
+    </div>
+    <div>
+      <button class="accordion" onclick="generateRulePair()">Pairing Search and Mask Rules</button>
+      <div class="panel" id="searchMask">
+        <p class="searchRule"></p>
+        <div id="myDropdown" class="dropdown-content">
+
+        </div>
+      </div>
+    </div>
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+    </script>
+
+    <button type="button" onclick="updatePayload()">Generate payload</button>
+    <p class="responseCode"></p>
+    <p class="result"></p>
+    <div class="form-control">
+    <label for="endpoint">Choose an endpoint:</label>
+    <select name="endpoint" id="endpoint" onchange="updatePayload()">
+      <option value="searchContext.create">Create a search context</option>
+      <option value="searchContext.destroy">Destroy a search context</option>
+      <option value="maskContext.create">Create a mask context</option>
+      <option value="maskContext.destroy">Destroy a mask context</option>
+      <option value="searchContext.search">Use an active search context to search text.</option>
+      <option value="maskContext.mask">Use an active mask context and search results to mask text.</option>
+      <option value="searchContext.mask">Use an active search context and mask context to search and mask text in one
+        pass.</option>
+      <option value="files/fileSearchContext.create">Create a file search context</option>
+      <option value="files/fileSearchContext.destroy">Destroy a file search context</option>
+      <option value="files/fileMaskContext.create">Create a file mask context</option>
+      <option value="files/fileMaskContext.destroy">Destroy a file mask context</option>
+      <option value="files/fileSearchContext.search">Use an active file search context to search a file.</option>
+      <option value="files/fileMaskContext.mask">Use an active file mask context and search results to mask a file.
+      </option>
+      <option value="files/fileSearchContext.mask">Use an active file search context and file mask context to search and
+        mask a file in one pass.</option>
+    </select>
+  </div>
+  <div class="form-control">
+    <label for="textForBaseAPI">Text:</label>
+    <textarea id="textForBaseAPI" name="textForBaseAPI">
+      Jacob Smith (Jasmith@gmail.com) told me his phone number is 941-242-2322.
+  </textarea>
+</div>
+<div class="form-control">
+    <label for="payload">Payload:</label>
+    <textarea id="payloadText" name="payloadText">
+  </textarea>
+</div>
+    <div class="mb-3">
+      <label for="formFile" class="form-label">File to mask</label>
+      <input class="form-control" type="file" id="formFile">
+    </div>
+    <div class="mb-3">
+      <label for="annotationFile" class="form-label">Annotation file to use (only for maskContext.mask and
+        fileMaskContext.mask endpoints)</label>
+      <input class="form-control" type="file" id="annotationFile">
+    </div>
+    <div class="spinner-border text-primary" id='blueLoadSpin' style="visibility: hidden;"></div>
+  <button type="button" onclick="sendJSON()">Try it</button>
+</div>
+</body>
+
+</html>
