@@ -96,9 +96,10 @@ function sendJSON() {
                 var blobUrl = URL.createObjectURL(new Blob([parts[1].buffer])); // parts[1] should be the masked file, parts[0] should be the JSON results file.
                 var link = document.createElement("a");
                 link.href = blobUrl;
-                link.download = document.getElementById("formFile").files[0].name + "_masked";
+                link.download = "masked_" + document.getElementById("formFile").files[0].name;
                 link.innerHTML = "Click here to download the file";
-                document.body.appendChild(link);
+                link.click()
+                //document.body.appendChild(link);
                 break;
             default:
                 break;
