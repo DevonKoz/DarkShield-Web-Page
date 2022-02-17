@@ -69,38 +69,39 @@
     <p class="responseCode"></p>
     <p class="result"></p>
     <div class="form-control">
-    <label for="endpoint">Choose an endpoint:</label>
-    <select name="endpoint" id="endpoint" onchange="updatePayload()">
-      <option value="searchContext.create">Create a search context</option>
-      <option value="searchContext.destroy">Destroy a search context</option>
-      <option value="maskContext.create">Create a mask context</option>
-      <option value="maskContext.destroy">Destroy a mask context</option>
-      <option value="searchContext.search">Use an active search context to search text.</option>
-      <option value="maskContext.mask">Use an active mask context and search results to mask text.</option>
-      <option value="searchContext.mask">Use an active search context and mask context to search and mask text in one
-        pass.</option>
-      <option value="files/fileSearchContext.create">Create a file search context</option>
-      <option value="files/fileSearchContext.destroy">Destroy a file search context</option>
-      <option value="files/fileMaskContext.create">Create a file mask context</option>
-      <option value="files/fileMaskContext.destroy">Destroy a file mask context</option>
-      <option value="files/fileSearchContext.search">Use an active file search context to search a file.</option>
-      <option value="files/fileMaskContext.mask">Use an active file mask context and search results to mask a file.
-      </option>
-      <option value="files/fileSearchContext.mask">Use an active file search context and file mask context to search and
-        mask a file in one pass.</option>
-    </select>
-  </div>
-  <div class="form-control">
-    <label for="textForBaseAPI">Text:</label>
-    <textarea id="textForBaseAPI" name="textForBaseAPI">
+      <label for="endpoint">Choose an endpoint:</label>
+      <select name="endpoint" id="endpoint" onchange="updatePayload()">
+        <option value="searchContext.create">Create a search context</option>
+        <option value="searchContext.destroy">Destroy a search context</option>
+        <option value="maskContext.create">Create a mask context</option>
+        <option value="maskContext.destroy">Destroy a mask context</option>
+        <option value="searchContext.search">Use an active search context to search text.</option>
+        <option value="maskContext.mask">Use an active mask context and search results to mask text.</option>
+        <option value="searchContext.mask">Use an active search context and mask context to search and mask text in one
+          pass.</option>
+        <option value="files/fileSearchContext.create">Create a file search context</option>
+        <option value="files/fileSearchContext.destroy">Destroy a file search context</option>
+        <option value="files/fileMaskContext.create">Create a file mask context</option>
+        <option value="files/fileMaskContext.destroy">Destroy a file mask context</option>
+        <option value="files/fileSearchContext.search">Use an active file search context to search a file.</option>
+        <option value="files/fileMaskContext.mask">Use an active file mask context and search results to mask a file.
+        </option>
+        <option value="files/fileSearchContext.mask">Use an active file search context and file mask context to search
+          and
+          mask a file in one pass.</option>
+      </select>
+    </div>
+    <div class="form-control">
+      <label for="textForBaseAPI">Text:</label>
+      <textarea id="textForBaseAPI" name="textForBaseAPI">
       Jacob Smith (Jasmith@gmail.com) told me his phone number is 941-242-2322.
   </textarea>
-</div>
-<div class="form-control">
-    <label for="payload">Payload:</label>
-    <textarea id="payloadText" name="payloadText">
+    </div>
+    <div class="form-control">
+      <label for="payload">Payload:</label>
+      <textarea id="payloadText" name="payloadText">
   </textarea>
-</div>
+    </div>
     <div class="mb-3">
       <label for="formFile" class="form-label">File to mask</label>
       <input class="form-control" type="file" id="formFile">
@@ -111,8 +112,8 @@
       <input class="form-control" type="file" id="annotationFile">
     </div>
     <div class="spinner-border text-primary" id='blueLoadSpin' style="visibility: hidden;"></div>
-  <button type="button" onclick="sendJSON()">Try it</button>
-</div>
+    <button type="button" onclick="sendJSON()">Try it</button>
+  </div>
 </body>
 
 </html>

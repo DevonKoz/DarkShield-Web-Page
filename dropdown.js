@@ -29,23 +29,6 @@ function generateRulePair() {
     }
 }
 
-
-// function checkBoxValues2(value) {
-//     var chkBox = document.getElementById(value);
-//     if (chkBox.value == "on" && !maskRules.includes(value)) {
-//         maskRules.push(value)        
-//     }
-// }
-
-// function checkBoxValues1(values) {
-//     var chkBox = document.getElementById(values);
-
-//     if (chkBox.value == "on" && !maskRules.includes(value)) {
-//         searchRules.push(values)
-//     }
-// }
-
-
 function getSelections(id) {
     var div = document.getElementById(id),
         // get an array of child nodes
@@ -70,13 +53,12 @@ function generateMask(searchMatcher, maskRules) {
     }
     for (let rule of maskRules) {
         if (document.getElementById("ruleList_" + searchMatcher + rule) == null) {
-        var option = document.createElement("OPTION");
-        option.setAttribute("value", rule);
-        option.id = "ruleList_" + searchMatcher + rule;
-        var text = document.createTextNode(rule);
-        option.appendChild(text);
-        document.getElementById("maskSelect" + searchMatcher).appendChild(option);
+            var option = document.createElement("OPTION");
+            option.setAttribute("value", rule);
+            option.id = "ruleList_" + searchMatcher + rule;
+            var text = document.createTextNode(rule);
+            option.appendChild(text);
+            document.getElementById("maskSelect" + searchMatcher).appendChild(option);
         }
     }
 }
-
