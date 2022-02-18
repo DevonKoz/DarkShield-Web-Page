@@ -62,3 +62,18 @@ function generateMask(searchMatcher, maskRules) {
         }
     }
 }
+
+function clearRulePair() {
+    var divS = document.getElementById("searchMatchers");
+    var divM = document.getElementById("maskRules");
+    // get an array of child nodes
+    divSearchChildren = divS.childNodes;
+    divMaskChildren = divM.childNodes;
+    for (var i = 0; i < divSearchChildren.length; i++) {
+        divSearchChildren[i].checked = false;
+    }
+    for (var i = 0; i < divSearchChildren.length; i++) {
+        divMaskChildren[i].checked = false;
+    }
+    map.clear();
+}

@@ -30,6 +30,7 @@
         Phone <input type="checkbox" id="Phone Numbers">
       </div>
     </div>
+    <button type="button" >Set Search Rules</button>
     <div>
       <button class="accordion">Mask Rules</button>
       <div class="panel" id="maskRules">
@@ -40,6 +41,7 @@
         AES 256 <input type="checkbox" id="AES256 Encryption">
       </div>
     </div>
+    <button type="button" >Set Masking Rules</button>
     <div>
       <button class="accordion" onclick="generateRulePair()">Pairing Search and Mask Rules</button>
       <div class="panel" id="searchMask">
@@ -66,6 +68,9 @@
     </script>
 
     <button type="button" onclick="updatePayload()">Generate payload</button>
+    
+    
+    <button type="button" onclick="clearRulePair()">Clear Selection</button>
     <p class="responseCode"></p>
     <p class="result"></p>
     <div class="form-control">

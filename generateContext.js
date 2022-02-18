@@ -84,6 +84,7 @@ function generateContext() {
             for (const [key, value] of map.entries()) {
                 searchContext.matchers.push(generateSearchMatcher(key));
             }
+            console.log(searchContext);
             return searchContext;
         case "searchContext.destroy":
             var deleteContext = { name: "SearchContext2" };
