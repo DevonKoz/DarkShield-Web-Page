@@ -5,6 +5,7 @@ function dropDownFunction() {
 }
 
 function generateRulePair() {
+    map.clear()
     var searchMatchers = getSelections("searchMatchers");
     var maskRules = getSelections("maskRules");
     var panel = document.getElementById("searchMask");
