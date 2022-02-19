@@ -98,15 +98,6 @@ function generateContext() {
             var i = 0;
             for (const [key, value] of map.entries()) {
                 i++;
-                // skip = 0;
-                // alreadyUsedMaskRule = "";
-                // for (const [key2, value2] of maskContext.rules.entries()){
-                // if (value2.name == value + "Rule"){
-                //     skip = 1;
-                //     alreadyUsedMaskRule = value2.name;
-                // }
-                // }
-
                 maskContext.rules.push(generateMaskRule(value, i));
                 maskContext.ruleMatchers.push(generateMaskRuleMatchers(key, value, i));
             }
@@ -116,7 +107,7 @@ function generateContext() {
             return deleteContext;
         case "searchContext.search":
             var context = {
-                searchContextName: "SearchContext2",
+                name: "SearchContext2",
                 text: document.getElementById("textForBaseAPI").textContent
             }
             return context;

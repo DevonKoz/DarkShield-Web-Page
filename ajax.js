@@ -14,11 +14,6 @@ function parseMultipartResponse(bytes) {
     lastSplit = 0;
     sections = [];
     addThis = false;
-    console.log(bytes)
-    let utf8Encode = new TextEncoder();
-    //bytesec = utf8Encode.encode(bytes)
-    console.log(bytes)
-    console.log(bytes.length)
     for (i = 0; i < bytes.length - 3; i++) {
         if (addThis && bytes[i] == 13 && bytes[i + 1] == 10 && bytes[i + 2] == 45 && bytes[i + 3] == 45) {
             sections.push(Uint8Array.from(bytes.slice(lastSplit + 4, i)));
@@ -27,19 +22,14 @@ function parseMultipartResponse(bytes) {
             continue;
         }
         if (bytes[i] == 13 && bytes[i + 1] == 10 && !addThis) {
-            console.log("line29")
             blocal = bytes.slice(lastSplit, i);
             sLocal = String.fromCharCode(...blocal);
-            console.log(sLocal)
             if (sLocal.startsWith("\r\ncontent-transfer-encoding: binary")) {
                 addThis = true;
             }
             lastSplit = i;
         }
-        // console.log(i)
     }
-    console.log(typeof sections)
-    console.log(sections)
     return sections;
 }
 
@@ -80,26 +70,25 @@ function sendJSON() {
             case "files/fileMaskContext.create":
 
             case "files/fileSearchContext.destroy":
-
+            case "files/fileSearchContext.search":
             case "files/fileMaskContext.destroy":
                 result.innerHTML = this.responseText;
                 break;
-            case "files/fileSearchContext.search":
             case "files/fileMaskContext.mask":
             case "files/fileSearchContext.mask":
                 parts = parseMultipartResponse(new Uint8Array(xhr.response));
                 if (parts.length == 0) {
-                    console.log("No parts")
                     break;
                 }
-                console.log(parts)
-                var blobUrl = URL.createObjectURL(new Blob([parts[1].buffer])); // parts[1] should be the masked file, parts[0] should be the JSON results file.
+                var maskedFileUrl = URL.createObjectURL(new Blob([parts[1].buffer])); // parts[1] should be the masked file, parts[0] should be the JSON results file.
+                var resultsFileUrl = URL.createObjectURL(new Blob([parts[0].buffer])); // parts[1] should be the masked file, parts[0] should be the JSON results file.
                 var link = document.createElement("a");
-                link.href = blobUrl;
+                link.href = maskedFileUrl;
                 link.download = "masked_" + document.getElementById("formFile").files[0].name;
-                link.innerHTML = "Click here to download the file";
                 link.click()
-                //document.body.appendChild(link);
+                link.href = resultsFileUrl;
+                link.download = document.getElementById("formFile").files[0].name + "_results.json";
+                link.click()
                 break;
             default:
                 break;
@@ -139,10 +128,12 @@ function sendJSON() {
             var formData = new FormData();
             formData.append("context", document.getElementById("payloadText").textContent);
             formData.append("file", document.getElementById('formFile').files[0]);
-            if (endPoint == "files/FileMaskContext.mask") {
+            if (endPoint == "files/fileMaskContext.mask") {
                 formData.append("annotations", document.getElementById('annotationFile').files[0]);
             }
-            xhr.responseType = "arraybuffer";
+            if (endPoint != "files/fileSearchContext.search") {
+                xhr.responseType = "arraybuffer";
+            }
             xhr.send(formData);
             break;
         default:
