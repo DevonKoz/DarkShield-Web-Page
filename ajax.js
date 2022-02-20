@@ -33,7 +33,7 @@ function parseMultipartResponse(bytes) {
     return sections;
 }
 
-function sendJSON() {
+function sendRequest() {
 
     let result = document.querySelector('.result');
     let response = document.querySelector('.responseCode');

@@ -34,11 +34,10 @@
     <div>
       <button class="accordion">Mask Rules</button>
       <div class="panel" id="maskRules">
-        FPE <input type="checkbox" id="FPE AES256 Encryption">
-        HASH <input type="checkbox" id="Hash">
-        Redact <input type="checkbox" id="Redaction">
-        Pseudomize <input type="checkbox" id="Pseudonymization">
-        AES 256 <input type="checkbox" id="AES256 Encryption">
+        FPE AES 256 Encryption <input type="checkbox" id="FPE AES256 Encryption">
+        Hash <input type="checkbox" id="Hash">
+        Redaction <input type="checkbox" id="Redaction">
+        AES 256 Encryption <input type="checkbox" id="AES256 Encryption">
       </div>
     </div>
 
@@ -68,8 +67,8 @@
     </script>
 
     <button type="button" onclick="updatePayload()">Generate payload</button>
-    
-    
+
+
     <button type="button" onclick="clearRulePair()">Clear Selection</button>
     <p class="responseCode"></p>
     <p class="result"></p>
@@ -117,7 +116,8 @@
       <input class="form-control" type="file" id="annotationFile">
     </div>
     <div class="spinner-border text-primary" id='blueLoadSpin' style="visibility: hidden;"></div>
-    <button type="button" onclick="sendJSON()">Try it</button>
+    <button type="button" onclick="sendRequest()">Try it</button>
   </div>
 </body>
+
 </html>
