@@ -82,6 +82,41 @@ function generateSearchMatcher(type) {
             json['type'] = "pattern";
             json['pattern'] = "\\b(\\+?1?([ .-]?)?)?(\\(?([2-9]\\d{2})\\)?([ .-]?)?)([2-9]\\d{2})([ .-]?)(\\d{4})(?: #?[eE][xX][tT]\.? \\d{2,6})?\\b";
             break;
+        case "American_Dates":
+            json['name'] = "American_Dates";
+            json['type'] = "pattern";
+            json['pattern'] = "\\b([0]\\d|[1][012])[-/.]?([012]\\d|[3][01])[-/.]?(\\d{4})\\b"
+            break;
+        case "European_Dates":
+            json['name'] = "European_Dates";
+            json['type'] = "pattern";
+            json['pattern'] = "\\b([012]\\d|[3][01])[-/.]?([0]\\d|[1][012])[-/.]?(\\d{4})\\b"
+            break;
+        case "URL":
+            json['name'] = "URL";
+            json['type'] = "pattern";
+            json['pattern'] = "\\b(\\w+):\\/\\/([\\w\\.-@]+)\.([A-Za-z\\.]{2,6})([\\/\w \\(\\)\\.-]*)*\\/?\\b"
+            break;
+        case "VIN":
+            json['name'] = "VIN";
+            json['type'] = "pattern";
+            json['pattern'] = "\\b([A-HJ-NPR-Z\\d]{3})([A-HJ-NPR-Z\\d]{5})([\\dX])(([A-HJ-NPR-Z\\d])([A-HJ-NPR-Z\\d])([A-HJ-NPR-Z\\d]{6}))\\b"
+            break;
+        case "US_Postal_Code":
+            json['name'] = "US_Postal_Code";
+            json['type'] = "pattern";
+            json['pattern'] = "\\b\\d{5}(?:-\\d{4})?\\b"
+            break;
+        case "IP_Address":
+            json['name'] = "IP_Address";
+            json['type'] = "pattern";
+            json['pattern'] = "\\b((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\b"
+            break;
+        case "SIN_Canada":
+            json['name'] = "SIN_Canada";
+            json['type'] = "pattern";
+            json['pattern'] = "\\b(\\d{3}[-]?\\d{3}[-]?\\d{3})\\b"
+            break;
         case "Names":
             json['name'] = "Names";
             json['type'] = "ner";
@@ -412,15 +447,15 @@ function generateSampleContexts() {
     sendRequest2("files/fileMaskContext.create", file_mask_context)
 
 }
-function deleteSampleContexts(){
+function deleteSampleContexts() {
     search_context_name = "SampleSearchContext";
     mask_context_name = "SampleMaskContext";
     file_search_context_name = "SampleFileSearchContext";
     file_mask_context_name = "SampleFileMaskContext";
-    var destroySearchContext = { name: search_context_name};
-    var destroyMaskContext = { name: mask_context_name};
-    var destroyFileSearchContext = { name: file_search_context_name};
-    var destroyFileMaskContext = { name: file_mask_context_name};
+    var destroySearchContext = { name: search_context_name };
+    var destroyMaskContext = { name: mask_context_name };
+    var destroyFileSearchContext = { name: file_search_context_name };
+    var destroyFileMaskContext = { name: file_mask_context_name };
     sendRequest2("searchContext.destroy", destroySearchContext);
     sendRequest2("maskContext.destroy", destroyMaskContext);
     sendRequest2("files/fileSearchContext.destroy", destroyFileSearchContext);
