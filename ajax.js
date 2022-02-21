@@ -43,6 +43,27 @@ function handleFile(url, result, response, file) {
         makeElementInvisible("blueLoadSpin")
         response.innerHTML = xhr.status;
         console.log(xhr.status);
+        if (xhr.status > 200) {
+            var alertBad = document.getElementById("alertBadResponse");
+            alertBad.innerHTML = "Bad response from DarkShield API."
+            alertBad.style.visibility = "visible";
+            var alertGood = document.getElementById("alertGoodResponse");
+            alertGood.style.visibility = "hidden";
+        }
+        else if (xhr.status == 0) {
+            var alertBad = document.getElementById("alertBadResponse");
+            alertBad.innerHTML = "Could not contact DarkShield API at " + url + "."
+            alertBad.style.visibility = "visible";
+            var alertGood = document.getElementById("alertGoodResponse");
+            alertGood.style.visibility = "hidden";
+        }
+        else if (xhr.status == 200){
+                var alertGood = document.getElementById("alertGoodResponse");
+                alertGood.innerHTML = "Successful response from DarkShield API."
+                alertGood.style.visibility = "visible";
+                var alertBad = document.getElementById("alertBadResponse");
+                alertBad.style.visibility = "hidden";
+        }
         endPoint = getElementValue("endpoint");
         switch (endPoint) {
             case "searchContext.create":
