@@ -1,3 +1,26 @@
+body {
+  width: auto;
+  height: auto;
+}
+
+img {
+  width: 15vw; 
+  height: 15vh;
+  margin: 1vh 1vw 1vh 1vw;
+}
+
+#first-page {
+  padding: 5px 15px 5px 15px;
+
+}
+.file-upload {
+  display: none;
+}
+
+.payload-buttons {
+  margin: 10px 0px 10px 0px;
+}
+
 .accordion {
   background-color: #eee;
   color: #444;
@@ -66,6 +89,10 @@
   display: block;
 }
 
+.textLabel {
+  width: 100%;
+}
+
 textarea {
   width: 600px;
   height: 180px;
@@ -73,4 +100,21 @@ textarea {
   padding: 5px;
   margin: 10px;
   font-family: Tahoma, sans-serif;
+}
+
+div#second-page.second-container-fluid {
+  display: none;
+  padding: 5px 15px 5px 15px;
+}
+
+ul.unordered-list {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+
+.top-page-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between
 }

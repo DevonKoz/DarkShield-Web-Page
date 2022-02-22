@@ -33,7 +33,7 @@ function parseMultipartResponse(bytes) {
     return sections;
 }
 
-function handleFile(url, result, response, file) {
+function handleFile(url, result, response, file, end_point) {
     let xhr = new XMLHttpRequest();
     // open a connection
 
@@ -87,6 +87,7 @@ function handleFile(url, result, response, file) {
             case "files/fileSearchContext.destroy":
             case "files/fileSearchContext.search":
             case "files/fileMaskContext.destroy":
+                
                 result.innerHTML = this.responseText;
                 break;
             case "files/fileMaskContext.mask":
@@ -110,8 +111,9 @@ function handleFile(url, result, response, file) {
         }
     };
 
-    endPoint = getElementValue("endpoint");
-    switch (endPoint) {
+    //endPoint = getElementValue("endpoint");
+    //endPoint = array[counter];
+    switch (end_point) {
         case "searchContext.create":
 
         case "searchContext.destroy":
@@ -143,10 +145,10 @@ function handleFile(url, result, response, file) {
             var formData = new FormData();
             formData.append("context", document.getElementById("payloadText").textContent);
             formData.append("file", file);
-            if (endPoint != "files/fileSearchContext.search") {
+            if (end_point != "files/fileSearchContext.search") {
                 xhr.responseType = "arraybuffer";
             }
-            if (endPoint == "files/fileMaskContext.mask") {
+            if (end_point == "files/fileMaskContext.mask") {
                 formData.append("annotations", document.getElementById('annotationFile').files[0]);
             }
             xhr.send(formData);
@@ -157,19 +159,19 @@ function handleFile(url, result, response, file) {
     makeElementVisible("blueLoadSpin")
 }
 
-function sendRequest() {
+function sendRequest(end_point) {
 
     let result = document.querySelector('.result');
     let response = document.querySelector('.responseCode');
     // Creating a XHR object
-    let url = "http://" + getElementValue("host") + ":" + getElementValue("port") + "/api/darkshield/" + getElementValue("endpoint");
+    let url = "http://" + getElementValue("host") + ":" + getElementValue("port") + "/api/darkshield/" + end_point;//getElementValue("endpoint");
     let files = document.getElementById("formFile").files;
     if (files.length <= 1) {
-        handleFile(url, result, response, files[0])
+        handleFile(url, result, response, files[0], end_point)
     }
     else if (files.length > 1) {
         for (let i = 0; i < files.length; i++) {
-            handleFile(url, result, response, files[i])
+            handleFile(url, result, response, files[i], end_point)
         }
     }
 

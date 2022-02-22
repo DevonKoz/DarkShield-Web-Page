@@ -11,15 +11,25 @@
   <script type="text/javascript" src="dropdown.js"></script>
   <script type="text/javascript" src="generateContext.js"></script>
   <script type="text/javascript" src="ajax.js"></script>
+  <script type="text/javascript" src="misc.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="container-fluid">
-    <label for="host">Host:</label>
-    <input type="host" id="host" name="host" value="localhost"><br><br>
-    <label for="port">Port:</label>
-    <input type="port" id="port" name="port" value="8959"><br><br>
+  <div class="container-fluid" id="first-page">
+    <div class="top-page-flex">
+      <ul class="unordered-list">
+        <li>
+          <label for="host">Host:</label>
+          <input type="host" id="host" name="host" value="localhost"><br><br>
+        </li>
+        <li>
+          <label for="port">Port:</label>
+          <input type="port" id="port" name="port" value="8959"><br><br>
+        </li>
+      </ul>
+      <img src="iri-darkshield-logo.png" alt="darkshield-logo">
+    </div>
     <div>
       <button class="accordion">Search Matchers</button>
       <div class="panel" id="searchMatchers">
@@ -73,7 +83,7 @@
       }
     </script>
 
-    <button type="button" onclick="updatePayload()">Generate payload</button>
+    <button class="payload-buttons" type="button" onclick="updatePayload()">Review and Edit</button>
 
 
     <button type="button" onclick="clearRulePair()">Clear Selection</button>
@@ -81,54 +91,40 @@
     </div>
     <div class="alert alert-success" role="alert" id="alertGoodResponse"  style="visibility: hidden;">
     </div>
+    <button class="payload-buttons" type="button" onclick="clearRulePair()">Clear Selection</button>
     <p class="responseCode"></p>
     <p class="result"></p>
-    <div class="form-control">
-      <label for="endpoint">Choose an endpoint:</label>
-      <select name="endpoint" id="endpoint" onchange="updatePayload()">
-        <option value="searchContext.create">Create a search context</option>
-        <option value="searchContext.destroy">Destroy a search context</option>
-        <option value="maskContext.create">Create a mask context</option>
-        <option value="maskContext.destroy">Destroy a mask context</option>
-        <option value="searchContext.search">Use an active search context to search text.</option>
-        <option value="maskContext.mask">Use an active mask context and search results to mask text.</option>
-        <option value="searchContext.mask">Use an active search context and mask context to search and mask text in one
-          pass.</option>
-        <option value="files/fileSearchContext.create">Create a file search context</option>
-        <option value="files/fileSearchContext.destroy">Destroy a file search context</option>
-        <option value="files/fileMaskContext.create">Create a file mask context</option>
-        <option value="files/fileMaskContext.destroy">Destroy a file mask context</option>
-        <option value="files/fileSearchContext.search">Use an active file search context to search a file.</option>
-        <option value="files/fileMaskContext.mask">Use an active file mask context and search results to mask a file.
-        </option>
-        <option value="files/fileSearchContext.mask">Use an active file search context and file mask context to search
-          and
-          mask a file in one pass.</option>
-      </select>
-    </div>
-    <div class="form-control">
-      <label for="textForBaseAPI">Text:</label>
-      <textarea id="textForBaseAPI" name="textForBaseAPI">
-      Jacob Smith (Jasmith@gmail.com) told me his phone number is 941-242-2322.
-  </textarea>
-    </div>
-    <div class="form-control">
-      <label for="payload">Payload:</label>
-      <textarea id="payloadText" name="payloadText">
-  </textarea>
-    </div>
-    <div class="mb-3">
-      <label for="formFile" class="form-label">Select file(s) to mask.</label>
-      <input class="form-control" type="file" id="formFile" multiple>
-    </div>
-    <div class="mb-3">
-      <label for="annotationFile" class="form-label">Annotation file to use (only for maskContext.mask and
-        fileMaskContext.mask endpoints)</label>
-      <input class="form-control" type="file" id="annotationFile">
-    </div>
-    <div class="spinner-border text-primary" id='blueLoadSpin' style="visibility: hidden;"></div>
-    <button type="button" onclick="sendRequest()">Try it</button>
   </div>
+
+  <div class="second-container-fluid" id="second-page">
+    <button class="process-payload" type="button" onclick="next()">Next</button>
+    <button type="button" onclick="reset()">Reset Session</button>
+    <p id="valueofendpoint"></p>
+  
+  <div class="form-control">
+    <label for="textForBaseAPI" class="textLabel">Text:</label>
+    <textarea id="textForBaseAPI" name="textForBaseAPI">
+    Jacob Smith (Jasmith@gmail.com) told me his phone number is 941-242-2322.
+</textarea>
+  </div>
+  <div class="form-control">
+    <label for="payload" class="textLabel">Payload:</label>
+    <textarea id="payloadText" name="payloadText">
+</textarea>
+  </div>
+  <div class="file-upload">
+    <label for="formFile" class="form-label">Select file(s) to mask.</label>
+    <input class="form-control" type="file" id="formFile" multiple>
+  </div>
+  <div class="file-upload">
+    <label for="annotationFile" class="form-label">Annotation file to use (only for maskContext.mask and
+      fileMaskContext.mask endpoints)</label>
+    <input class="form-control" type="file" id="annotationFile">
+  </div>
+  <div class="spinner-border text-primary" id='blueLoadSpin' style="visibility: hidden;"></div>
+  </div>
+  
+
 </body>
 
 </html>

@@ -73,7 +73,7 @@ function clearRulePair() {
     for (var i = 0; i < divSearchChildren.length; i++) {
         divSearchChildren[i].checked = false;
     }
-    for (var i = 0; i < divSearchChildren.length; i++) {
+    for (var i = 0; i < divMaskChildren.length; i++) {
         divMaskChildren[i].checked = false;
     }
     map.clear();
