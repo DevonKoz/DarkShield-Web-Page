@@ -2,7 +2,13 @@ const createEndPoints = ["searchContext.create", "maskContext.create", "files/fi
 const destroyEndPoints =["searchContext.destroy", "maskContext.destroy", "files/fileSearchContext.destroy", "files/fileMaskContext.destroy"]
 var counter;
 
+
+
 function updatePayload() {
+    var firstPage = document.getElementById("first-page");
+    var secondPage = document.getElementById("second-page");
+    firstPage.style.display = "none";
+    secondPage.style.display = "block";
     counter = 0;
     document.getElementById("payloadText").textContent = JSON.stringify(generateContext(createEndPoints[counter]));
     var par = document.getElementById("valueofendpoint");
@@ -196,13 +202,21 @@ function generateContext(endPoint) {
 }
 
 function next() {
-    sendRequest(createEndPoints[counter])
+    sendRequest(createEndPoints[counter]);
     if (counter < 4) {
         counter++;
     }
+    if (counter === 4){ 
+        var fileUpload = document.getElementsByClassName("file-upload");
+        for (var i = 0; i < fileUpload.length; i++ ) {
+            fileUpload[i].style.display = "block";
+        }
+        var btn = document.getElementsByClassName("process-payload");
+        btn[0].innerHTML = "Search and Mask";
+    }
     var par = document.getElementById("valueofendpoint");
     par.innerHTML = createEndPoints[counter];
-    document.getElementById("payloadText").textContent = JSON.stringify(generateContext(createEndPoints[counter]));
+    document.getElementById("payloadText").textContent = JSON.stringify(generateContext(createEndPoints[counter]));   
 }
 
 function reset() {
@@ -219,5 +233,15 @@ function reset() {
         acc[i].classList.toggle("active");
         var panel2 = acc[i].nextElementSibling;
         panel2.style.display = "none";
-  }
+    }
+    var firstPage = document.getElementById("first-page");
+    var secondPage = document.getElementById("second-page");
+    firstPage.style.display = "block";
+    secondPage.style.display = "none";
+    var fileUpload = document.getElementsByClassName("file-upload");
+    for (var i = 0; i < fileUpload.length; i++ ) {
+        fileUpload[i].style.display = "none";
+    }
+    var btn = document.getElementsByClassName("process-payload");
+        btn[0].innerHTML = "Next";
 }

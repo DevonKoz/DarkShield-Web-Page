@@ -1,5 +1,9 @@
 #first-page {
   padding: 5px 15px 5px 15px;
+
+}
+.file-upload {
+  display: none;
 }
 
 .payload-buttons {
@@ -88,5 +92,6 @@ textarea {
 }
 
 div#second-page.second-container-fluid {
+  display: none;
   padding: 5px 15px 5px 15px;
 }

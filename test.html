@@ -75,7 +75,7 @@
   </div>
 
   <div class="second-container-fluid" id="second-page">
-    <button type="button" onclick="next()">Next</button>
+    <button class="process-payload" type="button" onclick="next()">Next</button>
     <button type="button" onclick="reset()">Reset Session</button>
     <p id="valueofendpoint"></p>
   
@@ -90,11 +90,11 @@
     <textarea id="payloadText" name="payloadText">
 </textarea>
   </div>
-  <div class="mb-3">
+  <div class="file-upload">
     <label for="formFile" class="form-label">Select file(s) to mask.</label>
     <input class="form-control" type="file" id="formFile" multiple>
   </div>
-  <div class="mb-3">
+  <div class="file-upload">
     <label for="annotationFile" class="form-label">Annotation file to use (only for maskContext.mask and
       fileMaskContext.mask endpoints)</label>
     <input class="form-control" type="file" id="annotationFile">
