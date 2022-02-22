@@ -17,10 +17,19 @@
 
 <body>
   <div class="container-fluid" id="first-page">
-    <label for="host">Host:</label>
-    <input type="host" id="host" name="host" value="localhost"><br><br>
-    <label for="port">Port:</label>
-    <input type="port" id="port" name="port" value="8959"><br><br>
+    <div class="top-page-flex">
+      <ul class="unordered-list">
+        <li>
+          <label for="host">Host:</label>
+          <input type="host" id="host" name="host" value="localhost"><br><br>
+        </li>
+        <li>
+          <label for="port">Port:</label>
+          <input type="port" id="port" name="port" value="8959"><br><br>
+        </li>
+      </ul>
+      <img src="iri-darkshield-logo.png" alt="darkshield-logo">
+    </div>
     <div>
       <button class="accordion">Search Matchers</button>
       <div class="panel" id="searchMatchers">
