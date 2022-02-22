@@ -64,8 +64,7 @@ function handleFile(url, result, response, file, end_point) {
                 var alertBad = document.getElementById("alertBadResponse");
                 alertBad.style.visibility = "hidden";
         }
-        endPoint = getElementValue("endpoint");
-        switch (endPoint) {
+        switch (end_point) {
             case "searchContext.create":
 
             case "searchContext.destroy":
@@ -111,8 +110,6 @@ function handleFile(url, result, response, file, end_point) {
         }
     };
 
-    //endPoint = getElementValue("endpoint");
-    //endPoint = array[counter];
     switch (end_point) {
         case "searchContext.create":
 
