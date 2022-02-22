@@ -1,3 +1,10 @@
+#first-page {
+  padding: 5px 15px 5px 15px;
+}
+
+.payload-buttons {
+  margin: 10px 0px 10px 0px;
+}
 
 .accordion {
   background-color: #eee;
@@ -67,6 +74,10 @@
   display: block;
 }
 
+.textLabel {
+  width: 100%;
+}
+
 textarea {
   width: 600px;
   height: 180px;
@@ -76,3 +87,6 @@ textarea {
   font-family: Tahoma, sans-serif;
 }
 
+div#second-page.second-container-fluid {
+  padding: 5px 15px 5px 15px;
+}

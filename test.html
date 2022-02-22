@@ -66,10 +66,10 @@
       }
     </script>
 
-    <button type="button" onclick="updatePayload()">Generate payload</button>
+    <button class="payload-buttons" type="button" onclick="updatePayload()">Review and Edit</button>
 
 
-    <button type="button" onclick="clearRulePair()">Clear Selection</button>
+    <button class="payload-buttons" type="button" onclick="clearRulePair()">Clear Selection</button>
     <p class="responseCode"></p>
     <p class="result"></p>
   </div>
@@ -80,13 +80,13 @@
     <p id="valueofendpoint"></p>
   
   <div class="form-control">
-    <label for="textForBaseAPI">Text:</label>
+    <label for="textForBaseAPI" class="textLabel">Text:</label>
     <textarea id="textForBaseAPI" name="textForBaseAPI">
     Jacob Smith (Jasmith@gmail.com) told me his phone number is 941-242-2322.
 </textarea>
   </div>
   <div class="form-control">
-    <label for="payload">Payload:</label>
+    <label for="payload" class="textLabel">Payload:</label>
     <textarea id="payloadText" name="payloadText">
 </textarea>
   </div>
