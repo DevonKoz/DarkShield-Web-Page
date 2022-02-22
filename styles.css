@@ -34,8 +34,10 @@ ul.navigation li a:hover:not(.active) {
 }
 
 img {
-  width: 15vw; 
-  height: 15vh;
+  /*width: 15vw; 
+  height: 15vh;*/
+  width: 20%;
+  height: auto;
   margin: 1vh 1vw 1vh 1vw;
 }
 
@@ -74,6 +76,7 @@ img {
   display: none;
   background-color: white;
   overflow: hidden;
+  
 }
 .dropbtn {
   background-color: #3498db;
