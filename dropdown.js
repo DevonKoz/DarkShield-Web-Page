@@ -31,13 +31,15 @@ function generateRulePair() {
 }
 
 function getSelections(id) {
-    var div = document.getElementById(id),
+    var div = document.getElementById(id);
         // get an array of child nodes
-        divChildren = div.childNodes;
+    var children = div.children;
+        //divChildren = div.childNodes;
+    
     selections = [];
-    for (var i = 0; i < divChildren.length; i++) {
-        if (divChildren[i].checked) {
-            selections.push(divChildren[i].id)
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].children[0].checked) {
+            selections.push(children[i].children[0].id)
         }
     }
     return selections;
@@ -49,6 +51,7 @@ function generateMask(searchMatcher, maskRules) {
         var select = document.createElement("select")
         select.id = "maskSelect" + searchMatcher;
         var div = document.getElementById("div" + searchMatcher);
+        div.style.marginTop = "15px";
         div.appendChild(select)
         panel.appendChild(div);
     }
@@ -68,13 +71,23 @@ function clearRulePair() {
     var divS = document.getElementById("searchMatchers");
     var divM = document.getElementById("maskRules");
     // get an array of child nodes
-    divSearchChildren = divS.childNodes;
-    divMaskChildren = divM.childNodes;
+    let divSearchChildren = divS.children;
+    let divMaskChildren = divM.children;
     for (var i = 0; i < divSearchChildren.length; i++) {
-        divSearchChildren[i].checked = false;
+        divSearchChildren[i].children[0].checked = false;
     }
     for (var i = 0; i < divMaskChildren.length; i++) {
-        divMaskChildren[i].checked = false;
+        divMaskChildren[i].children[0].checked = false;
     }
     map.clear();
+    toggleOff();
+}
+
+function toggleOff() {
+    var i;
+    for (i = 0; i < acc.length; i++) { 
+        acc[i].classList.toggle("active");
+        var panel2 = acc[i].nextElementSibling;
+        panel2.style.display = "none";
+    }
 }

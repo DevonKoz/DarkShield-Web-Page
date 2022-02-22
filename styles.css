@@ -78,6 +78,37 @@ img {
   overflow: hidden;
   
 }
+
+
+
+div.panel  { 
+  margin: 0; 
+  padding: 0; 
+  margin-left: 20px; 
+  list-style: none; 
+} 
+
+div.panel li input { 
+  margin-right: .25em; 
+} 
+
+div.panel li {
+border: 1px transparent solid;
+float: left;
+min-width: 200px;
+}
+
+
+div.panel li:hover, 
+div.panel li.focus  { 
+  background-color: lightyellow; 
+  border: 1px gray solid; 
+  width: 12em; 
+} 
+
+
+
+
 .dropbtn {
   background-color: #3498db;
   color: white;

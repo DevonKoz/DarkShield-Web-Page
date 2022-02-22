@@ -263,12 +263,7 @@ function reset() {
     }
     document.getElementById("payloadText").textContent = '';
     clearRulePair();
-    var i;
-    for (i = 0; i < acc.length; i++) { 
-        acc[i].classList.toggle("active");
-        var panel2 = acc[i].nextElementSibling;
-        panel2.style.display = "none";
-    }
+    toggleOff();
     var firstPage = document.getElementById("first-page");
     var secondPage = document.getElementById("second-page");
     firstPage.style.display = "block";
@@ -300,3 +295,4 @@ function deleteSampleContexts() {
     sendRequest2("files/fileSearchContext.destroy", destroyFileSearchContext);
     sendRequest2("files/fileMaskContext.destroy", destroyFileMaskContext);
 }
+
