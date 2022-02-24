@@ -238,9 +238,9 @@ function generateContext(endPoint) {
 
 function next() {
     
-    if (window.localStorage.getItem('api_type') === 'darkshield-base') {
+    if (window.sessionStorage.getItem('api_type') === 'darkshield-base') {
         nextText();
-    } else if (window.localStorage.getItem('api_type') === 'darkshield-files') {
+    } else if (window.sessionStorage.getItem('api_type') === 'darkshield-files') {
         nextFile();
     }
 }
@@ -295,6 +295,7 @@ function nextText() {
 
 
 function reset() {
+    
     counter--;
     while (counter >= 0) {
         document.getElementById("payloadText").value = JSON.stringify(generateContext(destroyEndPoints[counter]));
@@ -321,6 +322,7 @@ function reset() {
         textUpload[i].style.display = "none";
     }
     btn[0].disabled = false;
+    
 }
 
 function setText() {
