@@ -1,7 +1,7 @@
 const createEndPoints = ["searchContext.create", "maskContext.create", "files/fileSearchContext.create", "files/fileMaskContext.create", "files/fileSearchContext.mask"]
 const destroyEndPoints =["searchContext.destroy", "maskContext.destroy", "files/fileSearchContext.destroy", "files/fileMaskContext.destroy"]
 var counter;
-
+var point;
 
 
 function updatePayload() {
@@ -10,7 +10,7 @@ function updatePayload() {
     firstPage.style.display = "none";
     secondPage.style.display = "block";
     counter = 0;
-    document.getElementById("payloadText").textContent = JSON.stringify(generateContext(createEndPoints[counter]));
+    document.getElementById("payloadText").value = JSON.stringify(generateContext(createEndPoints[counter]));
     var par = document.getElementById("valueofendpoint");
     par.innerHTML = createEndPoints[counter];
 }
@@ -154,7 +154,7 @@ function generateContext(endPoint) {
             for (const [key, value] of map.entries()) {
                 searchContext.matchers.push(generateSearchMatcher(key));
             }
-            console.log(searchContext);
+            
             return searchContext;
         case "searchContext.destroy":
             var deleteContext = { name: "SearchContext2" };
@@ -178,20 +178,20 @@ function generateContext(endPoint) {
         case "searchContext.search":
             var context = {
                 name: "SearchContext2",
-                text: document.getElementById("textForBaseAPI").textContent
+                text: document.getElementById("textForBaseAPI").value
             }
             return context;
         case "searchContext.mask":
             var context = {
                 searchContextName: "SearchContext2",
                 maskContextName: "MaskContext2",
-                text: document.getElementById("textForBaseAPI").textContent
+                text: document.getElementById("textForBaseAPI").value
             }
             return context;
         case "maskContext.mask":
             var context = {
                 maskContextName: "MaskContext2",
-                text: document.getElementById("textForBaseAPI").textContent
+                text: document.getElementById("textForBaseAPI").value
             }
             return context;
         case "files/fileSearchContext.create":
@@ -237,31 +237,72 @@ function generateContext(endPoint) {
 }
 
 function next() {
+    
+    if (window.localStorage.getItem('api_type') === 'darkshield-base') {
+        nextText();
+    } else if (window.localStorage.getItem('api_type') === 'darkshield-files') {
+        nextFile();
+    }
+}
+
+function nextFile() {
+    var btn = document.getElementsByClassName("process-payload");
+    var fileUpload = document.getElementsByClassName("file-upload");
+    var par = document.getElementById("valueofendpoint");
     sendRequest(createEndPoints[counter]);
     if (counter < 4) {
         counter++;
     }
     if (counter === 4){ 
-        var fileUpload = document.getElementsByClassName("file-upload");
         for (var i = 0; i < fileUpload.length; i++ ) {
             fileUpload[i].style.display = "block";
         }
-        var btn = document.getElementsByClassName("process-payload");
         btn[0].innerHTML = "Search and Mask";
     }
-    var par = document.getElementById("valueofendpoint");
     par.innerHTML = createEndPoints[counter];
-    document.getElementById("payloadText").textContent = JSON.stringify(generateContext(createEndPoints[counter]));   
+    document.getElementById("payloadText").value = JSON.stringify(generateContext(createEndPoints[counter]));
 }
+
+function nextText() {
+    var textUpload = document.getElementsByClassName("text-upload");
+    var par = document.getElementById("valueofendpoint");
+    var btn = document.getElementsByClassName("process-payload");
+    
+    if (counter === 2) {
+        
+        sendRequest("searchContext.mask");
+    }
+    
+    if (counter < 2 ) {
+        
+        sendRequest(createEndPoints[counter]);
+        counter++;
+    }
+    if (counter === 2) {
+        for (var i = 0; i < textUpload.length; i++ ) {
+            textUpload[i].style.display = "block";
+        }
+        btn[0].innerHTML = "Search and Mask";
+        par.innerHTML = "searchContext.mask";
+        document.getElementById("payloadText").value = JSON.stringify(generateContext("searchContext.mask"));
+        document.getElementById("process-payload").disabled = true;
+        document.getElementById("btn-set-text").style.display = "block";
+    } else {
+        par.innerHTML = createEndPoints[counter];
+        document.getElementById("payloadText").value = JSON.stringify(generateContext(createEndPoints[counter]));
+    }          
+}
+
 
 function reset() {
     counter--;
     while (counter >= 0) {
-        document.getElementById("payloadText").textContent = JSON.stringify(generateContext(destroyEndPoints[counter]));
+        document.getElementById("payloadText").value = JSON.stringify(generateContext(destroyEndPoints[counter]));
         sendRequest(destroyEndPoints[counter]);
         counter--;
     }
-    document.getElementById("payloadText").textContent = '';
+    document.getElementById("payloadText").value = '';
+    document.getElementById("textForBaseAPI").value = '';
     clearRulePair();
     toggleOff();
     var firstPage = document.getElementById("first-page");
@@ -272,27 +313,23 @@ function reset() {
     for (var i = 0; i < fileUpload.length; i++ ) {
         fileUpload[i].style.display = "none";
     }
-   /* sendRequest2("searchContext.create", search_context)
-    sendRequest2("maskContext.create", mask_context)
-    sendRequest2("files/fileSearchContext.create", file_search_context)
-    sendRequest2("files/fileMaskContext.create", file_mask_context)
-    */
+
     var btn = document.getElementsByClassName("process-payload");
     btn[0].innerHTML = "Next";
-
-}
-function deleteSampleContexts() {
-    search_context_name = "SampleSearchContext";
-    mask_context_name = "SampleMaskContext";
-    file_search_context_name = "SampleFileSearchContext";
-    file_mask_context_name = "SampleFileMaskContext";
-    var destroySearchContext = { name: search_context_name };
-    var destroyMaskContext = { name: mask_context_name };
-    var destroyFileSearchContext = { name: file_search_context_name };
-    var destroyFileMaskContext = { name: file_mask_context_name };
-    sendRequest2("searchContext.destroy", destroySearchContext);
-    sendRequest2("maskContext.destroy", destroyMaskContext);
-    sendRequest2("files/fileSearchContext.destroy", destroyFileSearchContext);
-    sendRequest2("files/fileMaskContext.destroy", destroyFileMaskContext);
+    var textUpload = document.getElementsByClassName("text-upload");
+    for (var i = 0; i < textUpload.length; i++ ) {
+        textUpload[i].style.display = "none";
+    }
+    btn[0].disabled = false;
 }
 
+function setText() {
+    let textContent = document.getElementById("textForBaseAPI").value;
+    let context = {
+        searchContextName: "SearchContext2",
+        maskContextName: "MaskContext2",
+        text: textContent
+    }
+    document.getElementById("payloadText").value = JSON.stringify(context);
+    document.getElementById("process-payload").disabled = false;
+}

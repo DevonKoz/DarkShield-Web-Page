@@ -33,15 +33,14 @@ function parseMultipartResponse(bytes) {
     return sections;
 }
 
-function handleFile(url, result, response, file, end_point) {
+function handleFile(url, file, end_point) {
     let xhr = new XMLHttpRequest();
     // open a connection
-
+    
     xhr.open("POST", url, true);
     // Create a state change callback
     xhr.onreadystatechange = function () {
         makeElementInvisible("blueLoadSpin")
-        response.innerHTML = xhr.status;
         console.log(xhr.status);
         if (xhr.status > 200) {
             var alertBad = document.getElementById("alertBadResponse");
@@ -75,7 +74,7 @@ function handleFile(url, result, response, file, end_point) {
 
             case "searchContext.search":
 
-            case "searchContext.mask":
+            
 
             case "maskContext.mask":
 
@@ -87,10 +86,11 @@ function handleFile(url, result, response, file, end_point) {
             case "files/fileSearchContext.search":
             case "files/fileMaskContext.destroy":
                 
-                result.innerHTML = this.responseText;
+                
                 break;
             case "files/fileMaskContext.mask":
             case "files/fileSearchContext.mask":
+                
                 parts = parseMultipartResponse(new Uint8Array(xhr.response));
                 if (parts.length == 0) {
                     break;
@@ -104,6 +104,10 @@ function handleFile(url, result, response, file, end_point) {
                 link.href = resultsFileUrl;
                 link.download = file.name + "_results.json";
                 link.click()
+                break;
+            case "searchContext.mask":
+               
+                console.log(xhr.responseText);
                 break;
             default:
                 break;
@@ -121,7 +125,7 @@ function handleFile(url, result, response, file, end_point) {
 
         case "searchContext.search":
 
-        case "searchContext.mask":
+        
 
         case "maskContext.mask":
 
@@ -134,13 +138,15 @@ function handleFile(url, result, response, file, end_point) {
         case "files/fileMaskContext.destroy":
             // Set the request header i.e. which type of content you are sending
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(document.getElementById("payloadText").textContent);
+            console.log(document.getElementById("payloadText").value);
+            xhr.send(document.getElementById("payloadText").value);
             break;
         case "files/fileSearchContext.search":
         case "files/fileMaskContext.mask":
         case "files/fileSearchContext.mask":
+            
             var formData = new FormData();
-            formData.append("context", document.getElementById("payloadText").textContent);
+            formData.append("context", document.getElementById("payloadText").value);
             formData.append("file", file);
             if (end_point != "files/fileSearchContext.search") {
                 xhr.responseType = "arraybuffer";
@@ -150,6 +156,10 @@ function handleFile(url, result, response, file, end_point) {
             }
             xhr.send(formData);
             break;
+        case "searchContext.mask":
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(document.getElementById("payloadText").value);
+            break;
         default:
             break;
     }
@@ -158,18 +168,26 @@ function handleFile(url, result, response, file, end_point) {
 
 function sendRequest(end_point) {
 
-    let result = document.querySelector('.result');
-    let response = document.querySelector('.responseCode');
     // Creating a XHR object
     let url = "http://" + getElementValue("host") + ":" + getElementValue("port") + "/api/darkshield/" + end_point;//getElementValue("endpoint");
+    console.log(end_point);
+    let text = document.getElementById("textForBaseAPI").value;
+    
     let files = document.getElementById("formFile").files;
-    if (files.length <= 1) {
-        handleFile(url, result, response, files[0], end_point)
-    }
-    else if (files.length > 1) {
-        for (let i = 0; i < files.length; i++) {
-            handleFile(url, result, response, files[i], end_point)
+    
+    
+    if (window.localStorage.getItem('api_type') == "darkshield-base") {
+        handleFile(url, text, end_point);
+    } else if (window.localStorage.getItem('api_type') == "darkshield-files") {
+        if (files.length <= 1) {
+            handleFile(url, files[0], end_point)
         }
+        else if (files.length > 1) {
+            for (let i = 0; i < files.length; i++) {
+                handleFile(url, files[i], end_point)
+            }
+        }
+    } else {
+        reset();
     }
-
 }

@@ -3,6 +3,12 @@ body {
   height: auto;
 }
 
+#first-page {
+  display: none;
+}
+
+
+
 ul.navigation {
   list-style-type: none;
   margin: 0 0 10px 0;
@@ -46,6 +52,10 @@ img {
 
 }
 .file-upload {
+  display: none;
+}
+
+.text-upload {
   display: none;
 }
 
@@ -106,7 +116,9 @@ div.panel li.focus  {
   width: 12em; 
 } 
 
-
+#btn-set-text {
+  display: none;
+}
 
 
 .dropbtn {
