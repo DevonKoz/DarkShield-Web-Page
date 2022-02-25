@@ -6,14 +6,12 @@ let contextNames= [];
 
 function generateUniqueID() {
     let id = () => {
-      return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1);
+        return crypto.randomUUID();
     }
-      contextNames.push("SearchContext"+id());
-      contextNames.push("MaskContext"+id());
-      contextNames.push("FileSearchContext"+id());
-      contextNames.push("FileMaskContext"+id());
+      contextNames.push("SearchContext_"+id());
+      contextNames.push("MaskContext_"+id());
+      contextNames.push("FileSearchContext_"+id());
+      contextNames.push("FileMaskContext_"+id());
     }
 
 function updatePayload() {
