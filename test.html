@@ -22,14 +22,10 @@
     <li><a href="https://www.iri.com/company/contact">CONTACT US</a></li>
   </ul>
 
-
-
   <div class="container-fluid" id="home-page">
-    <button type="button" onclick="route(false)">Text Search and Mask</button>
-    <button type="button" onclick="route(true)">Files Search and Mask</button>
+    <button class="btn btn-primary" type="button" onclick="route(false)">Text Search and Mask</button>
+    <button class="btn btn-primary" type="button" onclick="route(true)">Files Search and Mask</button>
   </div>
-
-
 
   <div class="container-fluid" id="first-page">
     <div class="top-page-flex">
@@ -94,8 +90,9 @@
         });
       }
     </script>
-    <button class="payload-buttons" type="button" onclick="updatePayload()">Review and Edit</button>
-    <button type="button" onclick="clearRulePair()">Clear Selection</button>
+    <br>
+    <button class="btn btn-success btn-block" id="payload-button" type="button" onclick="updatePayload()">Review and Edit</button>
+    <button class="btn btn-success btn-block" type="button" onclick="clearRulePair()">Clear Selection</button>
     <div class="alert alert-danger" role="alert" id="alertBadResponse"  style="visibility: hidden;">
     </div>
     <div class="alert alert-success" role="alert" id="alertGoodResponse"  style="visibility: hidden;">
@@ -108,8 +105,8 @@
 
 
   <div class="second-container-fluid" id="second-page">
-    <button class="process-payload" id="process-payload" type="button" onclick="next()">Next</button>
-    <button type="button" onclick="reset()">Reset Session</button>
+    <button class="btn btn-success btn-block" id="process-payload" type="button" onclick="next()">Next</button>
+    <button class="btn btn-success btn-block" type="button" onclick="reset()">Reset Session</button>
     <p id="valueofendpoint"></p>
     <div class="spinner-border text-primary" id='blueLoadSpin' style="visibility: hidden;">
     </div>
@@ -117,8 +114,6 @@
       <label for="payload" class="textLabel">Payload:</label>
       <textarea id="payloadText" name="payloadText"></textarea>
     </div>
-
-
     <div class="file-upload">
       <label for="formFile" class="form-label">Select file(s) to mask:</label>
       <input class="form-control" type="file" id="formFile" multiple>
@@ -129,13 +124,8 @@
     <div class="text-upload">
       <label for="textForBaseAPI" class="textLabel">Text:</label>
       <textarea class="form-control" id="textForBaseAPI" name="textForBaseAPI"></textarea>
-      <button type="button" id="btn-set-text" onclick="setText()">Confirm Text</button>
+      <button class="btn btn-success btn-block" type="button" id="btn-set-text" onclick="setText()">Confirm Text</button>
     </div>
-  
   </div>
-
-
-
 </body>
-
 </html>

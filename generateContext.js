@@ -258,7 +258,7 @@ function next() {
 }
 
 function nextFile() {
-    var btn = document.getElementsByClassName("process-payload");
+    var btn = document.getElementById("process-payload");
     var fileUpload = document.getElementsByClassName("file-upload");
     var par = document.getElementById("valueofendpoint");
     sendRequest(createEndPoints[counter]);
@@ -269,7 +269,7 @@ function nextFile() {
         for (var i = 0; i < fileUpload.length; i++ ) {
             fileUpload[i].style.display = "block";
         }
-        btn[0].innerHTML = "Search and Mask";
+        btn.innerHTML = "Search and Mask";
     }
     par.innerHTML = createEndPoints[counter];
     document.getElementById("payloadText").value = JSON.stringify(generateContext(createEndPoints[counter]));
@@ -278,8 +278,8 @@ function nextFile() {
 function nextText() {
     var textUpload = document.getElementsByClassName("text-upload");
     var par = document.getElementById("valueofendpoint");
-    var btn = document.getElementsByClassName("process-payload");
-    
+    var btn = document.getElementById("process-payload");
+    var payload = document.getElementById("payloadText");
     if (counter === 2) {
         
         sendRequest("searchContext.mask");
@@ -294,14 +294,14 @@ function nextText() {
         for (var i = 0; i < textUpload.length; i++ ) {
             textUpload[i].style.display = "block";
         }
-        btn[0].innerHTML = "Search and Mask";
+        btn.innerHTML = "Search and Mask";
         par.innerHTML = "searchContext.mask";
-        document.getElementById("payloadText").value = JSON.stringify(generateContext("searchContext.mask"));
-        document.getElementById("process-payload").disabled = true;
+        payload.value = JSON.stringify(generateContext("searchContext.mask"));
+        btn.disabled = true;
         document.getElementById("btn-set-text").style.display = "block";
     } else {
         par.innerHTML = createEndPoints[counter];
-        document.getElementById("payloadText").value = JSON.stringify(generateContext(createEndPoints[counter]));
+        payload.value = JSON.stringify(generateContext(createEndPoints[counter]));
     }          
 }
 
@@ -327,13 +327,13 @@ function reset() {
         fileUpload[i].style.display = "none";
     }
 
-    var btn = document.getElementsByClassName("process-payload");
-    btn[0].innerHTML = "Next";
+    var btn = document.getElementById("process-payload");
+    btn.innerHTML = "Next";
     var textUpload = document.getElementsByClassName("text-upload");
     for (var i = 0; i < textUpload.length; i++ ) {
         textUpload[i].style.display = "none";
     }
-    btn[0].disabled = false;
+    btn.disabled = false;
     
 }
 
