@@ -48,7 +48,9 @@
         <li><input type="checkbox" id="Credit Cards"><label for="Credit Cards">Credit Cards </label></li>
         <li><input type="checkbox" id="Emails"><label for="Emails">Emails </label></li>
         <li><input type="checkbox" id="Names"><label for="Names">Names </label></li>
-        <li><input type="checkbox" id="Phone Numbers"><label for="Phone Numbers">Phone </label></li>
+        <li><input type="checkbox" id="US Phone Numbers"><label for="US Phone Numbers">US Phone Numbers </label></li>
+        <li><input type="checkbox" id="International Phone Numbers"><label
+            for="International Phone Numbers">International Phone Numbers </label></li>
         <li><input type="checkbox" id="American_Dates"><label for="American_Dates">American Dates </label></li>
         <li><input type="checkbox" id="European_Dates"><label for="European_Dates">European Dates </label></li>
         <li><input type="checkbox" id="URL"><label for="URL">URLs </label></li>
@@ -56,15 +58,27 @@
         <li><input type="checkbox" id="US_Postal_Code"><label for="US_Postal_Code">US Postal Codes </label></li>
         <li><input type="checkbox" id="IP_Address"><label for="IP_Address">IP Addresses </label></li>
         <li><input type="checkbox" id="SIN_Canada"><label for="SIN_Canada">Canada SIN </label></li>
+        <li><input type="checkbox" id="Spain DNI"><label for="Spain DNI">Spain DNI </label></li>
+        <li><input type="checkbox" id="Spain NIE"><label for="Spain NIE">Spain NIE </label></li>
+        <li><input type="checkbox" id="PIN_MEXICO"><label for="Mexico CURP">Mexico CURP </label></li>
+        <li><input type="checkbox" id="PIN_AUSTRALIA"><label for="Australia TFN">Australia TFN </label></li>
+        <li><input type="checkbox" id="PIN_JAPAN"><label for="Japanese Individual Number">Japanese Individual Number
+          </label></li>
+        <li><input type="checkbox" id="PIN_FRANCE"><label for="France INSEE">France INSEE </label></li>
+        <li><input type="checkbox" id="PIN_UK_NHS"><label for="UK NHS">UK NHS </label></li>
+        <li><input type="checkbox" id="PIN_UK_NINO"><label for="UK NINO">UK NINO </label></li>
+        <li><input type="checkbox" id="PIN_SINGAPORE"><label for="Singapore NRIC">Singapore NRIC </label></li>
       </div>
     </div>
     <div>
       <button class="accordion">Mask Rules</button>
       <div class="panel" id="maskRules">
-        <li><input type="checkbox" id="FPE AES256 Encryption"><label for="FPE AES256 Encryption">FPE AES 256 Encryption </label></li>
+        <li><input type="checkbox" id="FPE AES256 Encryption"><label for="FPE AES256 Encryption">FPE AES 256 Encryption
+          </label></li>
         <li><input type="checkbox" id="Hash"><label for="Hash">Hash </label></li>
         <li><input type="checkbox" id="Redaction"><label for="Redaction">Redaction </label></li>
-        <li><input type="checkbox" id="AES256 Encryption"><label for="AES256 Encryption">AES 256 Encryption </label></li>
+        <li><input type="checkbox" id="AES256 Encryption"><label for="AES256 Encryption">AES 256 Encryption </label>
+        </li>
       </div>
     </div>
     <div>
@@ -91,11 +105,12 @@
       }
     </script>
     <br>
-    <button class="btn btn-success btn-block" id="payload-button" type="button" onclick="updatePayload()">Review and Edit</button>
+    <button class="btn btn-success btn-block" id="payload-button" type="button" onclick="updatePayload()">Review and
+      Edit</button>
     <button class="btn btn-success btn-block" type="button" onclick="clearRulePair()">Clear Selection</button>
-    <div class="alert alert-danger" role="alert" id="alertBadResponse"  style="visibility: hidden;">
+    <div class="alert alert-danger" role="alert" id="alertBadResponse" style="visibility: hidden;">
     </div>
-    <div class="alert alert-success" role="alert" id="alertGoodResponse"  style="visibility: hidden;">
+    <div class="alert alert-success" role="alert" id="alertGoodResponse" style="visibility: hidden;">
     </div>
   </div>
 
@@ -124,8 +139,10 @@
     <div class="text-upload">
       <label for="textForBaseAPI" class="textLabel">Text:</label>
       <textarea class="form-control" id="textForBaseAPI" name="textForBaseAPI"></textarea>
-      <button class="btn btn-success btn-block" type="button" id="btn-set-text" onclick="setText()">Confirm Text</button>
+      <button class="btn btn-success btn-block" type="button" id="btn-set-text" onclick="setText()">Confirm
+        Text</button>
     </div>
   </div>
 </body>
+
 </html>
