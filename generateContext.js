@@ -2,7 +2,19 @@ const createEndPoints = ["searchContext.create", "maskContext.create", "files/fi
 const destroyEndPoints =["searchContext.destroy", "maskContext.destroy", "files/fileSearchContext.destroy", "files/fileMaskContext.destroy"]
 var counter;
 var point;
+let contextNames= [];
 
+function generateUniqueID() {
+    let id = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+    }
+      contextNames.push("SearchContext"+id());
+      contextNames.push("MaskContext"+id());
+      contextNames.push("FileSearchContext"+id());
+      contextNames.push("FileMaskContext"+id());
+    }
 
 function updatePayload() {
     var firstPage = document.getElementById("first-page");
@@ -148,7 +160,7 @@ function generateContext(endPoint) {
     switch (endPoint) {
         case "searchContext.create":
             var searchContext = {
-                name: "SearchContext2",
+                name: contextNames[0],
                 matchers: []
             };
             for (const [key, value] of map.entries()) {
@@ -157,11 +169,11 @@ function generateContext(endPoint) {
             
             return searchContext;
         case "searchContext.destroy":
-            var deleteContext = { name: "SearchContext2" };
+            var deleteContext = { name: contextNames[0] };
             return deleteContext;
         case "maskContext.create":
             var maskContext = {
-                name: "MaskContext2",
+                name: contextNames[1],
                 rules: [],
                 ruleMatchers: []
             };
@@ -173,33 +185,33 @@ function generateContext(endPoint) {
             }
             return maskContext;
         case "maskContext.destroy":
-            var deleteContext = { name: "MaskContext2" };
+            var deleteContext = { name: contextNames[1] };
             return deleteContext;
         case "searchContext.search":
             var context = {
-                name: "SearchContext2",
+                name: contextNames[0],
                 text: document.getElementById("textForBaseAPI").value
             }
             return context;
         case "searchContext.mask":
             var context = {
-                searchContextName: "SearchContext2",
-                maskContextName: "MaskContext2",
+                searchContextName: contextNames[0],
+                maskContextName: contextNames[1],
                 text: document.getElementById("textForBaseAPI").value
             }
             return context;
         case "maskContext.mask":
             var context = {
-                maskContextName: "MaskContext2",
+                maskContextName: contextNames[1],
                 text: document.getElementById("textForBaseAPI").value
             }
             return context;
         case "files/fileSearchContext.create":
             var context = {
-                "name": "FileSearchContext2",
+                "name": contextNames[2],
                 "matchers": [
                     {
-                        "name": "SearchContext2",
+                        "name": contextNames[0],
                         "type": "searchContext"
                     }
                 ]
@@ -207,28 +219,28 @@ function generateContext(endPoint) {
             return context;
         case "files/fileMaskContext.create":
             var context = {
-                "name": "FileMaskContext2",
+                "name": contextNames[3],
                 "rules": [
                     {
-                        "name": "MaskContext2",
+                        "name": contextNames[1],
                         "type": "maskContext"
                     }
                 ]
             }
             return context;
         case "files/fileSearchContext.destroy":
-            var context = { name: "FileSearchContext2" };
+            var context = { name: contextNames[2] };
             return context;
         case "files/fileMaskContext.destroy":
-            var context = { name: "FileMaskContext2" };
+            var context = { name: contextNames[3] };
             return context;
         case "files/fileSearchContext.search":
         case "files/fileMaskContext.mask":
         case "files/fileSearchContext.mask":
             var context =
             {
-                "fileSearchContextName": "FileSearchContext2",
-                "fileMaskContextName": "FileMaskContext2"
+                "fileSearchContextName": contextNames[2],
+                "fileMaskContextName": contextNames[3]
             }
             return context;
         default:
@@ -328,8 +340,8 @@ function reset() {
 function setText() {
     let textContent = document.getElementById("textForBaseAPI").value;
     let context = {
-        searchContextName: "SearchContext2",
-        maskContextName: "MaskContext2",
+        searchContextName: contextNames[0],
+        maskContextName: contextNames[1],
         text: textContent
     }
     document.getElementById("payloadText").value = JSON.stringify(context);

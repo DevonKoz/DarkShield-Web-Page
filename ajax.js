@@ -74,8 +74,6 @@ function handleFile(url, file, end_point) {
 
                 case "searchContext.search":
 
-
-
                 case "maskContext.mask":
 
                 case "files/fileSearchContext.create":
@@ -85,8 +83,6 @@ function handleFile(url, file, end_point) {
                 case "files/fileSearchContext.destroy":
                 case "files/fileSearchContext.search":
                 case "files/fileMaskContext.destroy":
-
-
                     break;
                 case "files/fileMaskContext.mask":
                 case "files/fileSearchContext.mask":
@@ -106,12 +102,15 @@ function handleFile(url, file, end_point) {
                     link.click()
                     break;
                 case "searchContext.mask":
-
-                    let text = xhr.response;
-                    console.log(text);
-                    const obj = JSON.parse(text);
+                    const obj = JSON.parse(xhr.response);
                     console.log(obj.maskedText);
-                    
+                    let linkText = document.createElement("a");
+                    linkText.href = URL.createObjectURL(new Blob([obj.maskedText], {type: "text/plain"})); 
+                    linkText.download = "masked_" + "text.txt";
+                    linkText.click()
+                    linkText.href = URL.createObjectURL(new Blob([xhr.responseText], {type: "application/json"})); 
+                    linkText.download = "results.json";
+                    linkText.click()
                     break;
                 default:
                     break;
@@ -130,8 +129,6 @@ function handleFile(url, file, end_point) {
         case "maskContext.destroy":
 
         case "searchContext.search":
-
-
 
         case "maskContext.mask":
 
@@ -172,14 +169,10 @@ function handleFile(url, file, end_point) {
 }
 
 function sendRequest(end_point) {
-
     // Creating a XHR object
     let url = "http://" + getElementValue("host") + ":" + getElementValue("port") + "/api/darkshield/" + end_point;
     let text = document.getElementById("textForBaseAPI").value;
-
     let files = document.getElementById("formFile").files;
-
-
     if (window.sessionStorage.getItem('api_type') == "darkshield-base") {
         handleFile(url, text, end_point);
     } else if (window.sessionStorage.getItem('api_type') == "darkshield-files") {
