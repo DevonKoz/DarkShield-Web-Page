@@ -28,6 +28,7 @@ function generateRulePair() {
         }, false);
 
     }
+    document.getElementById('payload-button').disabled = false;
 }
 
 function getSelections(id) {
