@@ -86,31 +86,38 @@ function handleFile(url, file, end_point) {
                     break;
                 case "files/fileMaskContext.mask":
                 case "files/fileSearchContext.mask":
-
+                    
                     parts = parseMultipartResponse(new Uint8Array(xhr.response));
                     if (parts.length == 0) {
                         break;
                     }
-                    var maskedFileUrl = URL.createObjectURL(new Blob([parts[1].buffer])); // parts[1] should be the masked file, parts[0] should be the JSON results file.
-                    var resultsFileUrl = URL.createObjectURL(new Blob([parts[0].buffer])); // parts[1] should be the masked file, parts[0] should be the JSON results file.
-                    var link = document.createElement("a");
+                    var resultsBlob = new Blob([parts[0].buffer]);
+                    let maskedFileUrl = URL.createObjectURL(new Blob([parts[1].buffer])); // parts[1] should be the masked file, parts[0] should be the JSON results file.
+                    let resultsFileUrl = URL.createObjectURL(resultsBlob); // parts[1] should be the masked file, parts[0] should be the JSON results file.
+                    
+
+                    
+                    let link = document.createElement("a");
                     link.href = maskedFileUrl;
                     link.download = "masked_" + file.name;
-                    link.click()
+                    link.click();
                     link.href = resultsFileUrl;
-                    link.download = file.name + "_results.json";
-                    link.click()
+                    str = file.name;
+                    str = str.substring(0, str.indexOf("."));
+                    link.download = str + "_results.json";
+                    link.click();
                     break;
                 case "searchContext.mask":
                     const obj = JSON.parse(xhr.response);
-                    console.log(obj.maskedText);
                     let linkText = document.createElement("a");
-                    linkText.href = URL.createObjectURL(new Blob([obj.maskedText], {type: "text/plain"})); 
+                    let maskedTextUrl = URL.createObjectURL(new Blob([obj.maskedText], {type: "text/plain"}));
+                    linkText.href = maskedTextUrl;
                     linkText.download = "masked_" + "text.txt";
-                    linkText.click()
-                    linkText.href = URL.createObjectURL(new Blob([xhr.responseText], {type: "application/json"})); 
+                    linkText.click();
+                    let resultsTextUrl = URL.createObjectURL(new Blob([xhr.responseText], {type: "application/json"}));
+                    linkText.href = resultsTextUrl;
                     linkText.download = "results.json";
-                    linkText.click()
+                    linkText.click();
                     break;
                 default:
                     break;

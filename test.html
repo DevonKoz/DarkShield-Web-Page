@@ -12,12 +12,14 @@
   <script type="text/javascript" src="generateContext.js"></script>
   <script type="text/javascript" src="ajax.js"></script>
   <script type="text/javascript" src="misc.js"></script>
+  <script type="text/javascript" src="initTable.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body onload="generateUniqueID()">
   <ul class="navigation">
     <li><a onclick="goToHome()">HOME</a></li>
+    <li><a href="table-generate/main.html">View Results</a></li>
     <li><a href="https://www.iri.com/company/about-iri-the-cosort-company">ABOUT US</a></li>
     <li><a href="https://www.iri.com/company/contact">CONTACT US</a></li>
   </ul>
@@ -48,9 +50,9 @@
         <li><input type="checkbox" id="Credit Cards"><label for="Credit Cards">Credit Cards </label></li>
         <li><input type="checkbox" id="Emails"><label for="Emails">Emails </label></li>
         <li><input type="checkbox" id="Names"><label for="Names">Names </label></li>
-        <li><input type="checkbox" id="US Phone Numbers"><label for="US Phone Numbers">US Phone Numbers </label></li>
+        <li><input type="checkbox" id="US Phone Numbers"><label for="US Phone Numbers">US Phone # </label></li>
         <li><input type="checkbox" id="International Phone Numbers"><label
-            for="International Phone Numbers">International Phone Numbers </label></li>
+            for="International Phone Numbers">International Phone # </label></li>
         <li><input type="checkbox" id="American_Dates"><label for="American_Dates">American Dates </label></li>
         <li><input type="checkbox" id="European_Dates"><label for="European_Dates">European Dates </label></li>
         <li><input type="checkbox" id="URL"><label for="URL">URLs </label></li>
@@ -62,8 +64,7 @@
         <li><input type="checkbox" id="Spain NIE"><label for="Spain NIE">Spain NIE </label></li>
         <li><input type="checkbox" id="PIN_MEXICO"><label for="Mexico CURP">Mexico CURP </label></li>
         <li><input type="checkbox" id="PIN_AUSTRALIA"><label for="Australia TFN">Australia TFN </label></li>
-        <li><input type="checkbox" id="PIN_JAPAN"><label for="Japanese Individual Number">Japanese Individual Number
-          </label></li>
+        <li><input type="checkbox" id="PIN_JAPAN"><label for="Japanese Individual Number">Japanese Individual #</label></li>
         <li><input type="checkbox" id="PIN_FRANCE"><label for="France INSEE">France INSEE </label></li>
         <li><input type="checkbox" id="PIN_UK_NHS"><label for="UK NHS">UK NHS </label></li>
         <li><input type="checkbox" id="PIN_UK_NINO"><label for="UK NINO">UK NINO </label></li>
