@@ -192,14 +192,27 @@ function generateSearchMatcher(type) {
             json['type'] = "pattern";
             json['pattern'] = "\\b[STFG]\\d{7}[A-Z]\\b"
             break;
-        case "Names":
-            json['name'] = "Names";
+        case "US Names NER Model":
+            json['name'] = "US Names NER Model";
             json['type'] = "ner";
             json['pattern'] = "\\b(\\+?1?([ .-]?)?)?(\\(?([2-9]\\d{2})\\)?([ .-]?)?)([2-9]\\d{2})([ .-]?)(\\d{4})(?: #?[eE][xX][tT]\.? \\d{2,6})?\\b";
             json['modelUrl'] = "http://opennlp.sourceforge.net/models-1.5/en-ner-person.bin";
             json['sentenceDetectorUrl'] = "http://opennlp.sourceforge.net/models-1.5/en-sent.bin";
             json['tokenizerUrl'] = "http://opennlp.sourceforge.net/models-1.5/en-token.bin";
             break;
+		case "US First Names Set File":
+		    json['name'] = "US First Names Set File";
+            json['type'] = "set";
+            json['url'] = "https://raw.githubusercontent.com/DevonKoz/sets/main/sets/names/names_first.set"
+			json["ignoreCase"] = true,
+            json["matchWholeWords"] = true
+			break;
+		case "US Last Names Set File":
+		    json['name'] = "US Last Names Set File";
+            json['type'] = "set";
+            json['url'] = "https://raw.githubusercontent.com/DevonKoz/sets/main/sets/names/names_last.set"
+			json["ignoreCase"] = true,
+            json["matchWholeWords"] = true
         default:
             break;
     }
